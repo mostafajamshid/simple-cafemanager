@@ -25,3 +25,4 @@ BUILD and RUN
     4.Run the project
             * open your browser go to -> http://localhost:8000 and HAVE FUN 
  
+See screenshot <a href="SimpleCafeManagerAssignment.pdf" target="blank">here</a>
