@@ -1,4 +1,4 @@
-    CREATE TABLE `role`
+    CREATE TABLE IF NOT EXISTS `role`
     (
         `id`   int(11) NOT NULL AUTO_INCREMENT,
         `role` varchar(255) DEFAULT NULL,
@@ -6,7 +6,7 @@
     ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 
-    CREATE TABLE `cafe_table`
+    CREATE TABLE IF NOT EXISTS `cafe_table`
     (
         `id`           int(11) NOT NULL AUTO_INCREMENT,
         `name`         varchar(45) DEFAULT NULL,
@@ -16,29 +16,29 @@
         PRIMARY KEY (`id`)
     ) ENGINE=INNODB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
-    CREATE TABLE `product`
+    CREATE TABLE IF NOT EXISTS `product`
     (
         `id`           int(11) NOT NULL AUTO_INCREMENT,
         `name`         varchar(45) DEFAULT NULL,
         `description`  varchar(45) DEFAULT NULL,
         `date_created` datetime    DEFAULT NULL,
-        `price`        int(11) NOT NULL,
+        `price`        double (11,2) NOT NULL,
         PRIMARY KEY (`id`)
     ) ENGINE=INNODB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
-    CREATE TABLE `cafe_order`
+    CREATE TABLE IF NOT EXISTS `cafe_order`
     (
         `id`           int(11) NOT NULL AUTO_INCREMENT,
         `name`         varchar(45) DEFAULT NULL,
         `description`  varchar(45) DEFAULT NULL,
         `is_open`       bit(1)      DEFAULT b'1',
         `date_created` datetime    DEFAULT NULL,
-        `price`        double (11,2) NOT NULL,
+        `total_amount`        double (11,2) NOT NULL,
         PRIMARY KEY (`id`)
     ) ENGINE=INNODB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 
-    CREATE TABLE `user`
+    CREATE TABLE IF NOT EXISTS `user`
     (
         `id`       int(11) NOT NULL AUTO_INCREMENT,
         `active`   int(11) DEFAULT NULL,
@@ -52,20 +52,27 @@
     ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 
+    CREATE TABLE IF NOT EXISTS   `cafe_order_products` (
+        `order_id` int(11) NOT NULL,
+        `products_id` int(11) NOT NULL,
+        UNIQUE KEY `products_list_id` (`products_list_id`),
+        KEY `products_order_id` (`cafe_order_id`),
+        CONSTRAINT `fk_cafe_order_id` FOREIGN KEY (`order_id`) REFERENCES `cafe_order` (`id`),
+        CONSTRAINT `fk_products_id` FOREIGN KEY (`products_id`) REFERENCES `product_order` (`id`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-    CREATE TABLE `product_order`
+    CREATE TABLE IF NOT EXISTS `product_order`
     (
         `id`         int(11) not NULL AUTO_INCREMENT,
         `product_id` int(11) NOT NULL,
-        `order_id`   int(11) NOT NULL,
+        `quantity`   int(11) NOT NULL,
+        `amount`        double (11,2) NOT NULL,
         PRIMARY KEY (`id`),
         KEY          `id_productorder_product_id` (`product_id`),
-        KEY          `id_productorder_cafe_order_id` (`cafe_order_id`),
-        CONSTRAINT `id_productorder_product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-        CONSTRAINT `id_productorder_order_id` FOREIGN KEY (`order_id`) REFERENCES `cafe_order` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+        CONSTRAINT `id_productorder_product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
     ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-    CREATE TABLE `waiter_table`
+    CREATE TABLE IF NOT EXISTS `waiter_table`
     (
         `id`            int(11) not NULL AUTO_INCREMENT,
         `user_id`       int(11) NOT NULL,

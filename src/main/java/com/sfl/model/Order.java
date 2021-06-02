@@ -4,11 +4,17 @@
 
 package com.sfl.model;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 import javax.persistence.*;
 import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
 @Entity
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Table(name = "cafe_order")
 public class Order {
     @Id
@@ -21,44 +27,5 @@ public class Order {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public List<ProductInOrder> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<ProductInOrder> products) {
-        this.products = products;
-    }
-
-    public Double getTotalAmount() {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(Double totalAmount) {
-        this.totalAmount = totalAmount;
-    }
-
-    public Boolean getOpen() {
-        return isOpen;
-    }
-
-    public void setOpen(Boolean open) {
-        isOpen = open;
-    }
-
-    public Date getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
-    }
 }
 
