@@ -17,6 +17,7 @@ public class ProductInOrder {
     private int id;
     @ManyToOne
     private Product product;
+    private Double amount;
     private  int quantity;
 
 
