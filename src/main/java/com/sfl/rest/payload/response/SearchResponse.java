@@ -10,6 +10,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GenericResponse {
-    private Object data;
+public class SearchResponse {
+    private int orderCount;
+    private List<OrderResponse> orders;
 }

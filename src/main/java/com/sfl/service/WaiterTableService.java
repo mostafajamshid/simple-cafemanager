@@ -30,7 +30,7 @@ public class WaiterTableService {
 	}
 	
 	public WaiterTable findUserTable(int id){
-		return userTableRepository.findOne(id);
+		return userTableRepository.getById(id);
 	}
 	
 	public void save(WaiterTable waiterTable){
@@ -38,7 +38,7 @@ public class WaiterTableService {
 	}
 	
 	public void delete(int id){
-		userTableRepository.delete(id);
+		userTableRepository.deleteById(id);
 
 	}
 

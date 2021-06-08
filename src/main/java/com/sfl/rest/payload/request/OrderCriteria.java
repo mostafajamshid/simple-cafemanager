@@ -2,26 +2,19 @@
  * Copyright (c) 2021.  Mostafa Jamshid https://www.linkedin.com/in/mostafa-jamshid/
  */
 
-package com.sfl.rest.payload.response;
+package com.sfl.rest.payload.request;
 
-import com.sfl.model.ProductInOrder;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderResponse {
-    private int id;
+public class OrderCriteria {
     private String name;
     private String description;
     private Double totalAmount;
     private Boolean isOpen;
-    private Set<ProductInOrder> products = new HashSet<>();
-    private Date dateCreated;
 }

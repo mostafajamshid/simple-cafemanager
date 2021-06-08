@@ -22,6 +22,8 @@ public class Order {
     private int id;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductInOrder> products;
+    private String name;
+    private String description;
     private Double totalAmount;
     private Boolean isOpen;
     @Temporal(TemporalType.TIMESTAMP)

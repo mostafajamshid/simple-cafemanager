@@ -29,7 +29,7 @@ public class TableService {
 	}
 	
 	public Table findTable(int id){
-		return tableRepository.findOne(id);
+		return tableRepository.getById(id);
 	}
 	
 	public void save(Table table){
@@ -37,7 +37,7 @@ public class TableService {
 	}
 	
 	public void delete(int id){
-		tableRepository.delete(id);
+		tableRepository.deleteById(id);
 
 	}
 }

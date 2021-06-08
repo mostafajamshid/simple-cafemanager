@@ -27,7 +27,7 @@ public class ProductService {
 	}
 	
 	public Product findProduct(int id){
-		return productRepository.findOne(id);
+		return productRepository.getById(id);
 	}
 	
 	public void save(Product product){
@@ -35,7 +35,7 @@ public class ProductService {
 	}
 	
 	public void delete(int id){
-		productRepository.delete(id);
+		productRepository.deleteById(id);
 
 	}
 }
