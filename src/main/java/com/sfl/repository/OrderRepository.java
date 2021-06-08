@@ -12,6 +12,8 @@ import java.util.List;
 
 @Repository("orderRepository")
 public interface OrderRepository extends JpaRepository<Order, Integer> {
+
+    Order findById(int id);
     List<Order> findByNameContainingIgnoreCase(String name);
 
     List<Order> findByDescriptionContainingIgnoreCase(String description);

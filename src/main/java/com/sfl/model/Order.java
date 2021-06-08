@@ -18,7 +18,7 @@ import java.util.List;
 @Table(name = "cafe_order")
 public class Order {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductInOrder> products;

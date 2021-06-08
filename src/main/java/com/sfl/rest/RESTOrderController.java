@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -77,7 +78,7 @@ public class RESTOrderController {
     @ResponseStatus(HttpStatus.CREATED)
     public GenericResponse saveOrder(@RequestBody @Valid OrderRequest orderRequest) {
         Order order = orderMapper.toOrder(orderRequest);
-        BigDecimal total = BigDecimal.valueOf(0);
+        Double total = new Double(0);
         List<ProductInOrder> productInOrderList = new ArrayList<>();
         for (int i = 0; i < orderRequest.getProducts().size(); i++) {
             ProductInOrder productInOrder = new ProductInOrder();
@@ -85,10 +86,11 @@ public class RESTOrderController {
             productInOrder.setQuantity(orderRequest.getProducts().get(i).getQuantity());
             productInOrder.setAmount(productInOrder.getProduct().getPrice());
             productInOrderList.add(productInOrder);
-            total.add(BigDecimal.valueOf(productInOrder.getAmount()));
+            total += (productInOrder.getAmount() * productInOrder.getQuantity());
         }
         order.setProducts(productInOrderList);
         order.setTotalAmount(total.doubleValue());
+        order.setDateCreated(new Date());
         orderService.save(order);
         return new GenericResponse(orderMapper.toOrderResponse(order));
     }
@@ -97,7 +99,7 @@ public class RESTOrderController {
     public GenericResponse updateOrder(@PathVariable int id, @RequestBody @Valid OrderRequest orderRequest) {
         Order order = orderService.findOrder(id);
         List<ProductInOrder> productInOrderList = new ArrayList<>();
-        if (orderRequest.getProducts().size() > 1) {
+        if (orderRequest.getProducts() != null &&  orderRequest.getProducts().size() > 1){
             BigDecimal total = BigDecimal.valueOf(0);
             for (int i = 0; i < orderRequest.getProducts().size(); i++) {
                 ProductInOrder productInOrder = new ProductInOrder();

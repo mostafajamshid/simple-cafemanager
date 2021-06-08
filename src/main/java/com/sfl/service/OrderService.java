@@ -35,7 +35,8 @@ public class OrderService {
 
         if (searchCriteria.getName() == null
                 && searchCriteria.getDescription() == null
-                && searchCriteria.getTotalAmount() == null)
+                && searchCriteria.getTotalAmount() == null
+                && searchCriteria.getIsOpen() == null   )
             return findAll();
 
         System.out.println("search Criteria" + searchCriteria);
@@ -69,7 +70,7 @@ public class OrderService {
 
 
     public Order findOrder(int id) {
-        return orderRepository.getById(id);
+        return orderRepository.findById(id);
     }
 
     public void save(Order order) {
